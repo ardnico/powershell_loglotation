@@ -17,9 +17,10 @@ foreach($oneline in $csv_file){
     }else{
         $parentpath = Split-Path $oneline.FileName -Parent
         $childpath = Split-Path $oneline.FileName -Leaf
-        Get-ChildItem $parentpath | Where-Object{$_.Name -match ".$($childpath)"}| %{
+        $filenames = Get-ChildItem $parentpath | Where-Object{$_.Name -match ".$($childpath)"}
+        $filenames| %{
             $today = [DateTime]::ParseExact($(Get-Date -Format "yyyyMMdd") ,"yyyyMMdd", $null)
-            $fileDate = [DateTime]::ParseExact($(Get-ChidItem ).LastWriteTime.ToString("yyyyMMdd"),"yyyyMMdd", $null)
+            $fileDate = [DateTime]::ParseExact($(Get-ChidItem $_).LastWriteTime.ToString("yyyyMMdd"),"yyyyMMdd", $null)
             $diff_day = ($today - $fileDate).Days
             if($diff_day -gt $oneline.ExpireDate){
                 if($oneline.Mode -eq "comp"){
