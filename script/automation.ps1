@@ -20,17 +20,17 @@ foreach($oneline in $csv_file){
         $filenames = Get-ChildItem $parentpath | Where-Object{$_.Name -match ".$($childpath)"}
         $filenames| %{
             $today = [DateTime]::ParseExact($(Get-Date -Format "yyyyMMdd") ,"yyyyMMdd", $null)
-            $fileDate = [DateTime]::ParseExact($(Get-ChidItem $_).LastWriteTime.ToString("yyyyMMdd"),"yyyyMMdd", $null)
+            $fileDate = [DateTime]::ParseExact($((Get-ChildItem "$parentpath\$_").LastWriteTime.ToString("yyyyMMdd")),"yyyyMMdd", $null)
             $diff_day = ($today - $fileDate).Days
             if($diff_day -gt $oneline.ExpireDate){
                 if($oneline.Mode -eq "comp"){
                     $file_name = $_
                     $dist_dir = $oneline.DistNation
                     $option = $oneline.option
-                    $instance.compress_file($file_name,$dist_dir,$option)
+                    $instance.compress_file("$parentpath\$file_name",$dist_dir,$option)
                 }elseif($_.Mode -eq "del"){
                     $file_name = $_
-                    $instance.erase_file($file_name)
+                    $instance.erase_file("$parentpath\$file_name")
                 }
             }else{
                 $line = "This file is within the deadline: $($_)"

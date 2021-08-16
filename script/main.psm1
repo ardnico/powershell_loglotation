@@ -59,8 +59,8 @@ class lotate_mod{
             $this.write_log($line,1)
         }else{
             try{
-                .\7z.exe a "$dist_dir$(Split-Path $file_name -Leaf).zip" $file_name $option
-                # Directoryåˆ¤å®š
+                .\7z.exe a "$dist_dir\$(Split-Path $file_name -Leaf).zip" $file_name $option
+                # Directory”»’è
                 if((Get-Item $file_name).PSIsContainer -eq $True){
                     Remove-Item $file_name -Force -Recurse
                 }else{
@@ -81,7 +81,7 @@ class lotate_mod{
             if((Get-Item $file_name).PSIsContainer -eq $True){
             }else{
                 try{
-                    # Directoryåˆ¤å®š
+                    # Directory”»’è
                     if((Get-Item $file_name).PSIsContainer -eq $True){
                         Remove-Item $file_name -Force -Recurse
                     }else{
