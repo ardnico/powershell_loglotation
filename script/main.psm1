@@ -16,7 +16,7 @@ function putLog([String]$line,$code){
 class lotate_mod{
     [System.Object]$global:input_data = @{}
     
-    write_log($line,$code){
+    write_log([string]$line,[int]$code){
         if($this.input_data.logfile.Length -eq 0){
             $CurrentDir = "$(Get-Location)\log"
             New-Item $CurrentDir -ItemType Directory -Force
