@@ -4,6 +4,10 @@ $ErrorActionPreference_default = $ErrorActionPreference
 $ErrorActionPreference = "continue"
 
 $instance = New-Object lotate_mod
+$line = "Process Started"
+$instance.write_log($line,0)
+
+Start-Transcript  $instance.input_data.logfile
 if($(Test-Path .\param.csv) -eq $False){
     Write-Output("Mode,FileName,DistNation,ExpireDate,option") > .\param.csv
     return
@@ -41,3 +45,4 @@ foreach($oneline in $csv_file){
 }
 
 $ErrorActionPreference = $ErrorActionPreference_default
+Stop-Transcript

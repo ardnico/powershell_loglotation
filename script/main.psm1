@@ -7,7 +7,7 @@ function putLog([String]$line,$code){
     }elseif($code -eq -1){
         $code = "err"
     }
-    $key = "$(Get-Date -Format "[yyyy/MM/dd hh:mm:ss]") $line"
+    $key = "$(Get-Date -Format "[yyyy/MM/dd hh:mm:ss]") $code: $line"
     Write-Host($key)
     Write-Output($key)
     return $key
@@ -18,12 +18,12 @@ class lotate_mod{
     
     write_log($line,$code){
         if($this.input_data.logfile.Length -eq 0){
-            $CurrentDir = "$(Split-Path $MyInvocation.MyCommand.Path)\log"
+            $CurrentDir = "$(Get-Location)\log"
             New-Item $CurrentDir -ItemType Directory -Force
             $param = "$CurrentDir\lotation_$(Get-Date -Format 'yyyymmdd').log"
             $this.input_data.Add("logfile",$param)
         }
-        putLog([String]$line,$code)
+        putLog([String]$line,$code) > $this.input_data.logfile
     }
 
     [int]file_lock_chk($filename){
