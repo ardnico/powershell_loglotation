@@ -1,0 +1,24 @@
+﻿**********************
+Windows PowerShell トランスクリプト開始
+開始時刻: 20210817084013
+ユーザー名: LAPTOP-I4DGBSQV\masa
+RunAs ユーザー: LAPTOP-I4DGBSQV\masa
+構成名: 
+コンピューター: LAPTOP-I4DGBSQV (Microsoft Windows NT 10.0.19043.0)
+ホスト アプリケーション: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\masa\.vscode\extensions\ms-vscode.powershell-2021.8.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2021.8.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\masa\.vscode\extensions\ms-vscode.powershell-2021.8.0\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2021.8.0 <=====
+' -LogLevel 'Normal' -LogPath 'c:\Users\masa\.vscode\extensions\ms-vscode.powershell-2021.8.0\logs\1629157125-f6788480-6c12-4d42-8bdc-e2da7d0086451629157117573\EditorServices.log' -SessionDetailsPath 'c:\Users\masa\.vscode\extensions\ms-vscode.powershell-2021.8.0\sessions\PSES-VSCode-7920-999723' -FeatureFlags @() 
+プロセス ID: 23364
+PSVersion: 5.1.19041.1151
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.1151
+BuildVersion: 10.0.19041.1151
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+トランスクリプトが開始されました。出力ファイル: D:\develop\powershell\powershell_loglotation\script\log\lotation_20214017.log
+**********************
+Windows PowerShell トランスクリプト終了
+終了時刻: 20210817084014
+**********************

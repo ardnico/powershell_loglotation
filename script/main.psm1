@@ -7,7 +7,7 @@ function putLog([String]$line,$code){
     }elseif($code -eq -1){
         $code = "err"
     }
-    $key = "$(Get-Date -Format "[yyyy/MM/dd hh:mm:ss]") $code: $line"
+    $key = "$(Get-Date -Format "[yyyy/MM/dd hh:mm:ss]") $code : $line"
     Write-Host($key)
     Write-Output($key)
     return $key
@@ -60,12 +60,14 @@ class lotate_mod{
         }else{
             try{
                 .\7z.exe a "$dist_dir\$(Split-Path $file_name -Leaf).zip" $file_name $option
-                # Directory”»’è
+                # Directory check
                 if((Get-Item $file_name).PSIsContainer -eq $True){
                     Remove-Item $file_name -Force -Recurse
                 }else{
                     Remove-Item $file_name -Force
                 }
+                $line = "Successed to compress: [ $file_name ][ ""$dist_dir$(Split-Path $file_name -Leaf).zip"" ]"
+                $this.write_log($line,0)
             }catch{
                 $line = "This action failed: 7z.exe a ""$dist_dir$(Split-Path $file_name -Leaf).zip"" $file_name $option"
                 $this.write_log($line,-1)
@@ -81,12 +83,14 @@ class lotate_mod{
             if((Get-Item $file_name).PSIsContainer -eq $True){
             }else{
                 try{
-                    # Directory”»’è
+                    # Directory check
                     if((Get-Item $file_name).PSIsContainer -eq $True){
                         Remove-Item $file_name -Force -Recurse
                     }else{
                         Remove-Item $file_name -Force
                     }
+                    $line = "successed to delete: [ $file_name ]"
+                    $this.write_log($line,0)
                 }catch{
                     $line = "Failed to remove : $file_name"
                     $this.write_log($line,-1)
