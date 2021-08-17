@@ -6,8 +6,9 @@ $ErrorActionPreference = "continue"
 $instance = New-Object lotate_mod
 $line = "Process Started"
 $instance.write_log($line,0)
+$trans_log = "$($instance.input_data.logfile)_translog"
 
-Start-Transcript  $instance.input_data.logfile
+Start-Transcript $trans_log 
 if($(Test-Path .\param.csv) -eq $False){
     Write-Output("Mode,FileName,DistNation,ExpireDate,option") > .\param.csv
     return

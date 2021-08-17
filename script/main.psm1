@@ -23,7 +23,7 @@ class lotate_mod{
             $param = "$CurrentDir\lotation_$(Get-Date -Format 'yyyymmdd').log"
             $this.input_data.Add("logfile",$param)
         }
-        putLog([String]$line,$code) > $this.input_data.logfile
+        putLog([String]$line,$code) >> $this.input_data.logfile
     }
 
     [int]file_lock_chk($filename){
