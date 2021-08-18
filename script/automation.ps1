@@ -11,6 +11,9 @@ $trans_log = "$($instance.input_data.logfile)_translog"
 Start-Transcript $trans_log 
 if($(Test-Path .\param.csv) -eq $False){
     Write-Output("Mode,FileName,DistNation,ExpireDate,option") > .\param.csv
+    Write-Output("comp,F:\test.sample*.log,F:\del,7,") >> .\param.csv
+    Write-Output("comp,F:\sample\*.log,,7,") >> .\param.csv
+    Write-Output("del,F:\sample\del\*.zip,,180,") >> .\param.csv
     return
 }
 
@@ -22,7 +25,12 @@ foreach($oneline in $csv_file){
     }else{
         $parentpath = Split-Path $oneline.FileName -Parent
         $childpath = Split-Path $oneline.FileName -Leaf
-        $filenames = Get-ChildItem $parentpath | Where-Object{$_.Name -match ".$($childpath)"}
+        if(($oneline.DistNation -eq $Null) -or ($oneline.DistNation.Length -eq 0)){
+            $dist = $parentpath
+        }else{
+            $dist = $oneline.DistNation
+        }
+        $filenames = Get-ChildItem $parentpath | Where-Object{$_.Name -like $childpath}
         $filenames| %{
             $today = [DateTime]::ParseExact($(Get-Date -Format "yyyyMMdd") ,"yyyyMMdd", $null)
             $fileDate = [DateTime]::ParseExact($((Get-ChildItem "$parentpath\$_").LastWriteTime.ToString("yyyyMMdd")),"yyyyMMdd", $null)
@@ -30,7 +38,7 @@ foreach($oneline in $csv_file){
             if($diff_day -gt $oneline.ExpireDate){
                 if($oneline.Mode -eq "comp"){
                     $file_name = $_
-                    $dist_dir = $oneline.DistNation
+                    $dist_dir = $dist
                     $option = $oneline.option
                     $instance.compress_file("$parentpath\$file_name",$dist_dir,$option)
                 }elseif($_.Mode -eq "del"){
